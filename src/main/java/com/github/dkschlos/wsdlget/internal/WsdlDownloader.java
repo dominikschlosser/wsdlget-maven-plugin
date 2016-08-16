@@ -87,6 +87,10 @@ public class WsdlDownloader {
 
         WSDLWriter wsdlWriter = WSDLFactory.newInstance().newWSDLWriter();
 
+        writeToFile(serviceFolder, fileName, wsdlWriter, definition);
+    }
+
+    private void writeToFile(File serviceFolder, String fileName, WSDLWriter wsdlWriter, Definition definition) throws IOException, WSDLException {
         OutputStreamWriter out = null;
         try {
             out = new OutputStreamWriter(new FileOutputStream(new File(serviceFolder, fileName)), "UTF-8");
