@@ -1,6 +1,6 @@
 # wsdlget-maven-plugin
 
-Download WSDLs and referenced schema files. Schema locations are rewritten to reference the local files.
+Download WSDLs, imported WSDLs and referenced schema files. Schema and imported WSDL locations are rewritten to reference the local files.
 
 Usage example:
 
@@ -24,3 +24,11 @@ Usage example:
     </configuration>
 </plugin>
 ```
+
+*mvn wsdlget:wsdlget*
+
+# Requirements
+
+Right now, at least Java Version 8
+
+
