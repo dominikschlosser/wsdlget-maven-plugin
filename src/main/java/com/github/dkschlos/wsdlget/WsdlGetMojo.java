@@ -19,44 +19,44 @@ import org.apache.maven.plugins.annotations.Parameter;
 @Mojo(name = "wsdlget", defaultPhase = LifecyclePhase.GENERATE_RESOURCES)
 public class WsdlGetMojo extends AbstractMojo {
 
-	@Parameter(required = true)
-	private List<WsdlDefinition> wsdls;
+    @Parameter(required = true)
+    private List<WsdlDefinition> wsdls;
 
-	@Parameter(defaultValue = "${project.basedir}/src/main/resources/wsdl")
-	private String outputPath;
+    @Parameter(defaultValue = "${project.basedir}/src/main/resources/wsdl")
+    private String outputPath;
 
-	@Parameter(defaultValue = "false")
-	private boolean clearOutputDirectory;
+    @Parameter(defaultValue = "false")
+    private boolean clearOutputDirectory;
 
-	@Override
-	public void execute() throws MojoExecutionException, MojoFailureException {
-		Path root = Paths.get(outputPath);
-		if (clearOutputDirectory) {
-			clearDirectory(root);
-		}
-		for (WsdlDefinition wsdl : wsdls) {
-			WsdlDownloader downloader = new WsdlDownloader(root, wsdl);
-			downloader.download();
-		}
-	}
+    @Override
+    public void execute() throws MojoExecutionException, MojoFailureException {
+        Path root = Paths.get(outputPath);
+        if (clearOutputDirectory) {
+            clearDirectory(root);
+        }
+        for (WsdlDefinition wsdl : wsdls) {
+            WsdlDownloader downloader = new WsdlDownloader(root, wsdl);
+            downloader.download();
+        }
+    }
 
-	private static void clearDirectory(Path dir) {
-		try {
-			Files.walkFileTree(dir, new SimpleFileVisitor<Path>() {
-				@Override
-				public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
-					Files.delete(file);
-					return FileVisitResult.CONTINUE;
-				}
+    private static void clearDirectory(Path dir) {
+        try {
+            Files.walkFileTree(dir, new SimpleFileVisitor<Path>() {
+                @Override
+                public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+                    Files.delete(file);
+                    return FileVisitResult.CONTINUE;
+                }
 
-				@Override
-				public FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException {
-					Files.delete(dir);
-					return FileVisitResult.CONTINUE;
-				}
-			});
-		} catch (IOException ex) {
-			throw new RuntimeException("Can not clear output directory", ex);
-		}
-	}
+                @Override
+                public FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException {
+                    Files.delete(dir);
+                    return FileVisitResult.CONTINUE;
+                }
+            });
+        } catch (IOException ex) {
+            throw new RuntimeException("Can not clear output directory", ex);
+        }
+    }
 }
