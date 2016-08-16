@@ -1,13 +1,7 @@
 package com.github.dkschlos.wsdlget;
 
 import com.github.dkschlos.wsdlget.internal.WsdlDownloader;
-import java.io.IOException;
-import java.nio.file.FileVisitResult;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.SimpleFileVisitor;
-import java.nio.file.attribute.BasicFileAttributes;
+import java.io.File;
 import java.util.List;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -30,9 +24,9 @@ public class WsdlGetMojo extends AbstractMojo {
 
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
-        Path root = Paths.get(outputPath);
+        File root = new File(outputPath);
         if (clearOutputDirectory) {
-            clearDirectory(root);
+            deleteRecursively(root);
         }
         for (WsdlDefinition wsdl : wsdls) {
             WsdlDownloader downloader = new WsdlDownloader(root, wsdl);
@@ -40,23 +34,14 @@ public class WsdlGetMojo extends AbstractMojo {
         }
     }
 
-    private static void clearDirectory(Path dir) {
-        try {
-            Files.walkFileTree(dir, new SimpleFileVisitor<Path>() {
-                @Override
-                public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
-                    Files.delete(file);
-                    return FileVisitResult.CONTINUE;
-                }
-
-                @Override
-                public FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException {
-                    Files.delete(dir);
-                    return FileVisitResult.CONTINUE;
-                }
-            });
-        } catch (IOException ex) {
-            throw new RuntimeException("Can not clear output directory", ex);
+    private static void deleteRecursively(File f) throws MojoExecutionException {
+        if (f.isDirectory()) {
+            for (File c : f.listFiles()) {
+                deleteRecursively(c);
+            }
+        }
+        if (!f.delete()) {
+            throw new MojoExecutionException("Failed to delete file: " + f);
         }
     }
 }

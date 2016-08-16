@@ -1,12 +1,10 @@
 package com.github.dkschlos.wsdlget.internal;
 
 import com.github.dkschlos.wsdlget.WsdlDefinition;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.*;
 import javax.wsdl.Definition;
 import javax.wsdl.Import;
@@ -18,13 +16,13 @@ import javax.wsdl.xml.WSDLWriter;
 
 public class WsdlDownloader {
 
-    private final Path baseFolder;
+    private final File baseFolder;
     private final WsdlDefinition wsdl;
     private final Map<String, String> uriToWsdl = new HashMap<String, String>();
 
     private int wsdlCount = 0;
 
-    public WsdlDownloader(Path baseFolder, WsdlDefinition wsdl) {
+    public WsdlDownloader(File baseFolder, WsdlDefinition wsdl) {
         this.baseFolder = baseFolder;
         this.wsdl = wsdl;
     }
@@ -81,9 +79,8 @@ public class WsdlDownloader {
 
                 wsdlImport.setLocationURI((String) uriToWsdl.get(wsdlLocation));
             }
-
         }
-        Path serviceFolder = getOrCreateServiceFolder(serviceName);
+        File serviceFolder = getOrCreateServiceFolder(serviceName);
 
         SchemaDownloader schemaDownloader = new SchemaDownloader(serviceFolder, definition, serviceName);
         schemaDownloader.download();
@@ -92,7 +89,7 @@ public class WsdlDownloader {
 
         OutputStreamWriter out = null;
         try {
-            out = new OutputStreamWriter(new FileOutputStream(serviceFolder.resolve(fileName).toFile()), StandardCharsets.UTF_8);
+            out = new OutputStreamWriter(new FileOutputStream(new File(serviceFolder, fileName)), "UTF-8");
             wsdlWriter.writeWSDL(definition, out);
         } finally {
             if (out != null) {
@@ -101,9 +98,9 @@ public class WsdlDownloader {
         }
     }
 
-    private Path getOrCreateServiceFolder(String serviceName) throws IOException {
-        Path serviceFolder = baseFolder.resolve(serviceName);
-        Files.createDirectories(serviceFolder);
+    private File getOrCreateServiceFolder(String serviceName) throws IOException {
+        File serviceFolder = new File(baseFolder, serviceName);
+        serviceFolder.mkdirs();
         return serviceFolder;
     }
 

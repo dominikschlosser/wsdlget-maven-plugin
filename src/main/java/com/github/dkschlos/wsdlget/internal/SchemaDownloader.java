@@ -1,10 +1,9 @@
 package com.github.dkschlos.wsdlget.internal;
 
 import com.ibm.wsdl.util.xml.DOM2Writer;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Path;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -28,16 +27,15 @@ public class SchemaDownloader {
     private static final String INCLUDE_TAG = "include";
     private static final String SCHEMA_LOCATION = "schemaLocation";
 
-    private final Path outputFolder;
+    private final File outputFolder;
     private final Definition definition;
     private final String serviceName;
-
-    private int schemaCount = 0;
     private final Map<String, String> changedSchemaLocations = new HashMap<String, String>();
-
     private final Set<String> processedSchemas = new HashSet<String>();
 
-    public SchemaDownloader(Path outputFolder, Definition definition, String serviceName) {
+    private int schemaCount = 0;
+
+    public SchemaDownloader(File outputFolder, Definition definition, String serviceName) {
         this.outputFolder = outputFolder;
         this.definition = definition;
         this.serviceName = serviceName;
@@ -91,7 +89,7 @@ public class SchemaDownloader {
                 OutputStreamWriter writer = null;
 
                 try {
-                    writer = new OutputStreamWriter(new FileOutputStream(outputFolder.resolve(fileName).toFile()), StandardCharsets.UTF_8);
+                    writer = new OutputStreamWriter(new FileOutputStream(new File(outputFolder, fileName)), "UTF-8");
                     DOM2Writer.serializeAsXML(schema.getElement(), definition.getNamespaces(), writer);
                 } finally {
                     if (writer != null) {
