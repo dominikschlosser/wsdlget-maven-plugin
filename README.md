@@ -6,9 +6,9 @@ Usage example:
 
 ```Java
 <plugin>
-    <groupId>org.apache.maven.plugins</groupId>
-    <artifactId>maven-compiler-plugin</artifactId>
-    <version>3.5.1</version>
+    <groupId>com.github.dkschlos</groupId>
+    <artifactId>wsdlget-maven-plugin</artifactId>
+    <version>1.0.0</version>
     <configuration>
         <clearOutputDirectory>true</clearOutputDirectory>
         <outputPath>path/to/desired/output</outputPath>
@@ -23,14 +23,4 @@ Usage example:
         </wsdls>
     </configuration>
 </plugin>
-```
-
-## Get it from maven central
-
-```Java
-<dependency>
-  <groupId>com.github.dkschlos</groupId>
-  <artifactId>wsdlget-maven-plugin</artifactId>
-  <version>1.0.0</version>
-</dependency>
 ```
