@@ -1,4 +1,4 @@
-# wsdlget-maven-plugin
+# wsdlget-maven-plugin [![Build Status](https://travis-ci.org/dkschlos/wsdlget-maven-plugin.svg?branch=master)](https://travis-ci.org/dkschlos/wsdlget-maven-plugin)
 
 Download WSDLs, imported WSDLs and referenced schema files. Schema and imported WSDL locations are rewritten to reference the local files.
 
