@@ -1,6 +1,6 @@
 language: java
 jdk:
-  - oraclejdk6
+  - oraclejdk7
 script: cd wsdlget-maven-plugin && mvn test $MVN_ARGS
 after_success:
   - bash <(curl -s https://codecov.io/bash)
