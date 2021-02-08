@@ -29,7 +29,7 @@ public class WsdlGetMojo extends AbstractMojo {
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
         File root = new File(outputPath);
-        if (clearOutputDirectory) {
+        if (clearOutputDirectory && root.exists()) {
             deleteRecursively(root);
         }
         for (WsdlDefinition wsdl : wsdls) {
