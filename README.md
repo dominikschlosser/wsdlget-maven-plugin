@@ -11,8 +11,9 @@ Usage example:
     <version>1.0.0</version>
     <configuration>
         <clearOutputDirectory>true</clearOutputDirectory>
-        <outputPath>path/to/desired/output</outputPath>
-        <wsdls>
+<outputPath>path/to/desired/output</outputPath>
+<subfolderByServiceName>false</subfolderByServiceName>
+<wsdls>
           <wsdl>
             <url>http://someurl/service.wsdl</url>
           </wsdl>
