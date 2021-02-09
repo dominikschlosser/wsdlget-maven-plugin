@@ -16,7 +16,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.dkschlos</groupId>
     <artifactId>wsdlget-maven-plugin</artifactId>
-    <version>1.1.0-SNAPSHOT</version>
+    <version>1.0.1</version>
     <name>wsdlget-maven-plugin Maven Mojo</name>
     <description>
         Maven plugin which downloads a wsdl and all referenced schema-files/inner-wsdls recursively to a specified target folder (default: src/main/resources/wsdl) and rewrites schema-locations in all files.
@@ -28,6 +28,11 @@
             <name>Dominik Schlosser</name>
             <email>dominik.schlosser@gmail.com</email>
             <url>http://www.dominik-schlosser.de</url>
+        </developer>
+        <developer>
+            <name>Marco Aversano</name>
+            <email>abelmarkus@gmail.com</email>
+            <url>https://github.com/abelmarkus</url>
         </developer>
     </developers>
     <scm>
