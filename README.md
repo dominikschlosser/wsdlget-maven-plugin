@@ -12,6 +12,7 @@ Usage example:
     <configuration>
         <clearOutputDirectory>true</clearOutputDirectory>
         <outputPath>path/to/desired/output</outputPath>
+        <subfolderByServiceName>false</subfolderByServiceName>
         <wsdls>
           <wsdl>
             <url>http://someurl/service.wsdl</url>

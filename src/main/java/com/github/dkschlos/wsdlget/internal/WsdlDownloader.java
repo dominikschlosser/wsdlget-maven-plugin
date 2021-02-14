@@ -1,11 +1,7 @@
 package com.github.dkschlos.wsdlget.internal;
 
 import com.github.dkschlos.wsdlget.WsdlDefinition;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.util.*;
+
 import javax.wsdl.Definition;
 import javax.wsdl.Import;
 import javax.wsdl.Service;
@@ -13,17 +9,27 @@ import javax.wsdl.WSDLException;
 import javax.wsdl.factory.WSDLFactory;
 import javax.wsdl.xml.WSDLReader;
 import javax.wsdl.xml.WSDLWriter;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class WsdlDownloader {
 
     private final File baseFolder;
+    private final boolean subfolderByServiceName;
     private final WsdlDefinition wsdl;
     private final Map<String, String> uriToWsdl = new HashMap<String, String>();
 
     private int wsdlCount = 0;
 
-    public WsdlDownloader(File baseFolder, WsdlDefinition wsdl) {
+    public WsdlDownloader(File baseFolder, WsdlDefinition wsdl, boolean subfolderByServiceName) {
         this.baseFolder = baseFolder;
+        this.subfolderByServiceName = subfolderByServiceName;
         this.wsdl = wsdl;
     }
 
@@ -103,7 +109,7 @@ public class WsdlDownloader {
     }
 
     private File getOrCreateServiceFolder(String serviceName) throws IOException {
-        File serviceFolder = new File(baseFolder, serviceName);
+        File serviceFolder = subfolderByServiceName ? new File(baseFolder, serviceName) : baseFolder;
         serviceFolder.mkdirs();
         return serviceFolder;
     }

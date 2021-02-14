@@ -16,7 +16,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.dkschlos</groupId>
     <artifactId>wsdlget-maven-plugin</artifactId>
-    <version>1.1.0-SNAPSHOT</version>
+    <version>1.0.1</version>
     <name>wsdlget-maven-plugin Maven Mojo</name>
     <description>
         Maven plugin which downloads a wsdl and all referenced schema-files/inner-wsdls recursively to a specified target folder (default: src/main/resources/wsdl) and rewrites schema-locations in all files.
@@ -28,6 +28,11 @@
             <name>Dominik Schlosser</name>
             <email>dominik.schlosser@gmail.com</email>
             <url>http://www.dominik-schlosser.de</url>
+        </developer>
+        <developer>
+            <name>Marco Aversano</name>
+            <email>abelmarkus@gmail.com</email>
+            <url>https://github.com/abelmarkus</url>
         </developer>
     </developers>
     <scm>
@@ -68,7 +73,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-source-plugin</artifactId>
-                        <version>2.4</version>
+                        <version>3.2.0</version>
                         <executions>
                             <execution>
                                 <id>attach-sources</id>
@@ -81,7 +86,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-javadoc-plugin</artifactId>
-                        <version>2.9.1</version>
+                        <version>3.2.0</version>
                         <executions>
                             <execution>
                                 <id>attach-javadocs</id>
@@ -108,7 +113,7 @@
                     <plugin>
                         <groupId>org.sonatype.plugins</groupId>
                         <artifactId>nexus-staging-maven-plugin</artifactId>
-                        <version>1.6.7</version>
+                        <version>1.6.8</version>
                         <extensions>true</extensions>
                         <configuration>
                             <serverId>ossrh</serverId>
@@ -125,7 +130,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.5.1</version>
+                <version>3.8.1</version>
                 <configuration>
                     <source>1.6</source>
                     <target>1.6</target>
@@ -134,7 +139,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-plugin-plugin</artifactId>
-                <version>3.4</version>
+                <version>3.6.0</version>
                 <configuration>
                     <!--  see http://jira.codehaus.org/browse/MNG-5346  -->
                     <skipErrorNoDescriptorsFound>true</skipErrorNoDescriptorsFound>
@@ -154,12 +159,12 @@
         <dependency>
             <groupId>org.apache.maven</groupId>
             <artifactId>maven-plugin-api</artifactId>
-            <version>3.3.9</version>
+            <version>3.6.3</version>
         </dependency>
         <dependency>
             <groupId>org.apache.maven.plugin-tools</groupId>
             <artifactId>maven-plugin-annotations</artifactId>
-            <version>3.4</version>
+            <version>3.6.0</version>
         </dependency>
         <dependency>
             <groupId>wsdl4j</groupId>
@@ -169,12 +174,12 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>1.7.21</version>
+            <version>1.7.30</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
-            <version>1.7.21</version>
+            <version>1.7.30</version>
         </dependency>
     </dependencies>
     <properties>
